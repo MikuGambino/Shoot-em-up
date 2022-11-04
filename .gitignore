@@ -1,0 +1,51 @@
+*.md5
+project.godot
+.import/.gdignore
+.mono/assemblies/Debug/api_hash_cache.cfg
+.mono/assemblies/Debug/GodotSharp.dll
+.mono/assemblies/Debug/GodotSharp.pdb
+.mono/assemblies/Debug/GodotSharp.xml
+.mono/assemblies/Debug/GodotSharpEditor.dll
+.mono/assemblies/Debug/GodotSharpEditor.pdb
+.mono/assemblies/Debug/GodotSharpEditor.xml
+.mono/metadata/ide_messaging_meta.txt
+.idea/.idea.Shoot 'em up/.idea/.gitignore
+.idea/.idea.Shoot 'em up/.idea/encodings.xml
+.idea/.idea.Shoot 'em up/.idea/indexLayout.xml
+.idea/.idea.Shoot 'em up/.idea/vcs.xml
+.import/player-animation-down1.png-740339e67d70948c87b309937a3f3f33.stex
+.import/player-animation-down2.png-7144a68edc7b6eea7cb26987da7ac1d8.stex
+.import/player-animation-stay1.png-675c23e117a13c7f9201a74186b872e5.stex
+.import/player-animation-stay2.png-8a27abcf137d01d5ef6478e4fa7381b6.stex
+.import/player-animation-up1.png-2b81d3882a243e4861f9a5deda7815f0.stex
+.import/player-animation-up2.png-b0709b6117de18e9886fab724efad8a8.stex
+.mono/assemblies/Release/api_hash_cache.cfg
+.mono/assemblies/Release/GodotSharp.dll
+.mono/assemblies/Release/GodotSharp.pdb
+.mono/assemblies/Release/GodotSharp.xml
+.mono/assemblies/Release/GodotSharpEditor.dll
+.mono/assemblies/Release/GodotSharpEditor.pdb
+.mono/assemblies/Release/GodotSharpEditor.xml
+.mono/metadata/scripts_metadata.editor
+.mono/metadata/scripts_metadata.editor_player
+.mono/temp/bin/Debug/Shoot 'em up.dll
+.mono/temp/bin/Debug/Shoot 'em up.pdb
+.mono/temp/obj/project.assets.json
+.mono/temp/obj/project.nuget.cache
+.mono/temp/obj/project.packagespec.json
+.mono/temp/obj/rider.project.restore.info
+.mono/temp/obj/Shoot 'em up.csproj.nuget.dgspec.json
+.mono/temp/obj/Shoot 'em up.csproj.nuget.g.props
+.mono/temp/obj/Shoot 'em up.csproj.nuget.g.targets
+.mono/temp/obj/Debug/.NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+.mono/temp/obj/Debug/Shoot 'em up.AssemblyInfo.cs
+.mono/temp/obj/Debug/Shoot 'em up.AssemblyInfoInputs.cache
+.mono/temp/obj/Debug/Shoot 'em up.assets.cache
+.mono/temp/obj/Debug/Shoot 'em up.csproj.AssemblyReference.cache
+.mono/temp/obj/Debug/Shoot 'em up.csproj.CoreCompileInputs.cache
+.mono/temp/obj/Debug/Shoot 'em up.csproj.FileListAbsolute.txt
+.mono/temp/obj/Debug/Shoot 'em up.dll
+.mono/temp/obj/Debug/Shoot 'em up.GeneratedMSBuildEditorConfig.editorconfig
+.mono/temp/obj/Debug/Shoot 'em up.pdb
+Shoot 'em up.csproj
+Shoot 'em up.sln
