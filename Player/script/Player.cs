@@ -148,7 +148,7 @@ public class Player : Area2D
     // }
     
     //TODO проверить
-public void OnPlayerEffectTimeout()
+    private void OnPlayerEffectTimeout()
     {
         _playerEffect++;
         Visible = !Visible;
