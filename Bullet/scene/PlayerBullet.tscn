@@ -5,3 +5,5 @@
 
 [node name="PlayerBullet" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
+
+[connection signal="body_entered" from="." to="." method="OnBulletBodyEntered"]

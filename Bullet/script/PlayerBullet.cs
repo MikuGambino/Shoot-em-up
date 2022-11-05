@@ -20,5 +20,21 @@ public class PlayerBullet : Bullet
         Position += Speed;
     }
 
-    // todo OnBulletBodyEntered
+    public void OnBulletBodyEntered(Mob body)
+    {
+        body.Hit();
+        if (body.IsDead())
+        {
+            if(body.GetType().Name.Contains("red")) EmitSignal("DestroyEnemy", 166);
+            if (body.GetType().Name.Contains("purple")) EmitSignal("DestroyEnemy", 166);
+
+            // var boom = (Explosion)Explosion.Instance();
+            // boom.Position = Position;
+            // GetParent().GetParent().AddChild(boom);
+            
+            body.QueueFree();
+        }
+        QueueFree();
+    }
+    
 }
