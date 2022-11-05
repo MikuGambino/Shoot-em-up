@@ -45,4 +45,6 @@ position = Vector2( 10, 1 )
 [node name="PlayerEffect" type="Timer" parent="."]
 wait_time = 0.1
 
+[connection signal="area_entered" from="." to="." method="OnPlayerAreaEntered"]
+[connection signal="body_entered" from="." to="." method="OnPlayerBodyEntered"]
 [connection signal="timeout" from="PlayerEffect" to="." method="OnPlayerEffectTimeout"]
