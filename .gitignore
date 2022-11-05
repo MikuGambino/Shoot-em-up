@@ -49,3 +49,4 @@ project.godot
 .mono/temp/obj/Debug/Shoot 'em up.pdb
 Shoot 'em up.csproj
 Shoot 'em up.sln
+*.stex

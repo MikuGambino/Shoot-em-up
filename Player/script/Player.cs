@@ -6,8 +6,8 @@ public class Player : Area2D
     private int Speed = 100;
     public bool CanPlay = false;
     public bool Upgrade = false;
-    public int PlayerEffect = 0;
-    private Vector2 ScreenSize;
+    private int _playerEffect = 0;
+    private Vector2 _screenSize;
 
     public override void _Ready()
     {
@@ -16,7 +16,7 @@ public class Player : Area2D
         var animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
         animatedSprite.Animation = "default";
         animatedSprite.Play();
-        ScreenSize = GetViewportRect().Size;
+        _screenSize = GetViewportRect().Size;
     }
     
     public override void _Process(float delta)
@@ -25,11 +25,9 @@ public class Player : Area2D
         var velocity = Vector2.Zero;
         var animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
         
-        // OnAttack(); //TODO откоментировать
+        OnAttack(); 
         
         var flag = false;
-        
-        Console.WriteLine("Dasdas");
         
         if (Input.IsActionPressed("ui_right"))
         {
@@ -60,33 +58,35 @@ public class Player : Area2D
         }
         Position += velocity * delta;
         Position = new Vector2(
-            x: Mathf.Clamp(Position.x, 9, ScreenSize.x - 11),
-            y: Mathf.Clamp(Position.y, 3, ScreenSize.y - 3)
+            x: Mathf.Clamp(Position.x, 9, _screenSize.x - 11),
+            y: Mathf.Clamp(Position.y, 3, _screenSize.y - 3)
         );
     }
     
-    // TODO переписать
-    // private void OnAttack()
-    // {
-    //     if (!Input.IsActionJustPressed("fire") || !CanPlay) return;
-    //     var bInstance = (Bullet) Bullet.Instance();
-    //     bInstance.Connect("DestroyEnemy", this, nameof(AddScore));
-    //     var bulPos = GetNode<Position2D>("BulletPosition");
-    //     bInstance.Position = bulPos.GlobalPosition;
-    //     GetParent().AddChild(bInstance);
-    //
-    //     if (Upgrade)
-    //     {
-    //         for (int i = 1; i < 3; i++)
-    //         {
-    //             bInstance = (Bullet) Bullet.Instance();
-    //             bInstance.Connect("DestroyEnemy", this, nameof(AddScore));
-    //             bInstance.SetType("default", i, true);
-    //             bInstance.Position = bulPos.GlobalPosition;
-    //             GetParent().AddChild(bInstance);
-    //         }
-    //     }
-    // }
+    private void OnAttack()
+    {
+        if (!Input.IsActionJustPressed("fire") || !CanPlay) return;
+        var bulPos = GetNode<Position2D>("BulletPosition");
+        var playerBullet = GD.Load<PackedScene>("res://Bullet/scene/PlayerBullet.tscn");
+        var bullet1 = (PlayerBullet) playerBullet.Instance();
+        bullet1.Init();
+        bullet1.Position = bulPos.GlobalPosition;
+        GetParent().AddChild(bullet1);
+        
+        if (Upgrade)
+        {
+            var bullet2 = (PlayerBullet) playerBullet.Instance();
+            bullet2.Init(Vector2.Right * 4 + Vector2.Up, -8);
+            bullet2.Position = bulPos.GlobalPosition;
+            GetParent().AddChild(bullet2);
+
+            var bullet3 = (PlayerBullet) playerBullet.Instance();
+            bullet3.Init(Vector2.Right * 4 + Vector2.Down, 8);
+            bullet3.Position = bulPos.GlobalPosition;
+            GetParent().AddChild(bullet3);
+
+        }
+    }
     
     // public void AddScore(int score)
     // {
@@ -152,11 +152,11 @@ public class Player : Area2D
     //TODO проверить
 public void OnPlayerEffectTimeout()
     {
-        PlayerEffect++;
+        _playerEffect++;
         Visible = !Visible;
-        if (PlayerEffect == 20)
+        if (_playerEffect == 20)
         {
-            PlayerEffect = 0;
+            _playerEffect = 0;
             Visible = true;
             GetNode<Timer>("PlayerEffect").Stop();
             GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
