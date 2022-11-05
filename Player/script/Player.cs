@@ -69,7 +69,6 @@ public class Player : Area2D
         var bulPos = GetNode<Position2D>("BulletPosition");
         var playerBullet = GD.Load<PackedScene>("res://Bullet/scene/PlayerBullet.tscn");
         var bullet1 = (PlayerBullet) playerBullet.Instance();
-        bullet1.Init();
         bullet1.Position = bulPos.GlobalPosition;
         GetParent().AddChild(bullet1);
         
@@ -79,12 +78,11 @@ public class Player : Area2D
             bullet2.Init(Vector2.Right * 4 + Vector2.Up, -8);
             bullet2.Position = bulPos.GlobalPosition;
             GetParent().AddChild(bullet2);
-
+            
             var bullet3 = (PlayerBullet) playerBullet.Instance();
             bullet3.Init(Vector2.Right * 4 + Vector2.Down, 8);
             bullet3.Position = bulPos.GlobalPosition;
             GetParent().AddChild(bullet3);
-
         }
     }
     

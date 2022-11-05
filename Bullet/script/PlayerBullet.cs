@@ -3,22 +3,21 @@ using System;
 
 public class PlayerBullet : Bullet
 {
-    private Vector2 _speed = Vector2.Right * 6;
-    public void Init()
+    public PlayerBullet()
     {
+        Speed = Vector2.Right * 6;
         GetNode<AnimatedSprite>("AnimatedSprite").Animation = "default";
         GetNode<AnimatedSprite>("AnimatedSprite").FlipH = false;
     }
     public void Init(Vector2 speed, int deegres)
     {
-        Init();
-        _speed = speed;
+        Speed = speed;
         GetNode<AnimatedSprite>("AnimatedSprite").RotationDegrees = deegres;
     }
     
     public override void _Process(float delta)
     {
-        Position += _speed;
+        Position += Speed;
     }
 
     // todo OnBulletBodyEntered
