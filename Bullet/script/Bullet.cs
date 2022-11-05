@@ -1,15 +1,15 @@
 using Godot;
 using System;
 
-public class Bullet : Area2D
+public abstract class Bullet : Area2D
 {
     protected Vector2 Speed;
-    public void OnTimerTimeout()
+    protected void OnTimerTimeout()
     {
         QueueFree();
     }
     
-    public void OnVisibilityNotifier2DScreenExited()
+    protected void OnVisibilityNotifier2DScreenExited()
     {
         QueueFree();
     }

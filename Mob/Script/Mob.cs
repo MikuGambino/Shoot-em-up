@@ -1,20 +1,20 @@
 using Godot;
 using System;
 
-public class Mob : RigidBody2D
+public abstract class Mob : RigidBody2D
 {
-    private int _mobLives;
+    protected int MobLives;
     private int _mobEffect = 0;
 
     public void Hit()
     {
         GetNode<Timer>("MobEffect").Start();
-        _mobLives--;
+        MobLives--;
     }
 
     public bool IsDead()
     {
-        return _mobLives == 0;
+        return MobLives == 0;
     }
     
     public override void _Ready()
@@ -22,17 +22,17 @@ public class Mob : RigidBody2D
         GetNode<Timer>("Reload").Start();
     }
     
-    public void OnVisibilityNotifier2DScreenExited()
+    protected void OnVisibilityNotifier2DScreenExited()
     {
         QueueFree();
     }
     
-    public void OnTimerTimeout()
+    protected void OnTimerTimeout()
     {
         QueueFree();
     }
     
-    public void OnMobEffectTimeout()
+    protected void OnMobEffectTimeout()
     {
         _mobEffect++;
         GetNode<AnimatedSprite>("AnimatedSprite").Modulate = _mobEffect % 2 == 1 ? new Color(10, 10 ,10, 10) : new Color(1, 1 ,1);
@@ -42,7 +42,7 @@ public class Mob : RigidBody2D
         GetNode<Timer>("MobEffect").Stop();
     }
     
-    public void OnReloadTimeout()
+    protected void OnReloadTimeout()
     {
         Attack();
         var timer = GetNode<Timer>("Reload");
@@ -50,7 +50,5 @@ public class Mob : RigidBody2D
         timer.Start();
     }
 
-    public void Attack()
-    {
-    }
+    protected abstract void Attack();
 }
