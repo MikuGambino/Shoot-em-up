@@ -28,9 +28,9 @@ public class PlayerBullet : Bullet
             if(body.GetType().Name.Contains("red")) EmitSignal("DestroyEnemy", 166);
             if (body.GetType().Name.Contains("purple")) EmitSignal("DestroyEnemy", 166);
 
-            // var boom = (Explosion)Explosion.Instance();
-            // boom.Position = Position;
-            // GetParent().GetParent().AddChild(boom);
+            var boom = (Explosion) GD.Load<PackedScene>("res://Explosion/scene/Explosion.tscn").Instance();
+            boom.Position = Position;
+            GetParent().GetParent().AddChild(boom);
             
             body.QueueFree();
         }

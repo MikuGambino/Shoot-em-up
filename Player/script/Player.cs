@@ -89,12 +89,14 @@ public class Player : Area2D
 
     private void Hit()
     {
-        _lives -= 1;
+        _lives--;
         // todo уменьшить количество жизней в UI via signal        
         if (_lives < 0)
         {
-            // var boom = (Explosion)Explosion.Instance();
-            // GetParent().AddChild(boom);
+            Console.WriteLine(_lives);
+            var boom = (Explosion) GD.Load<PackedScene>("res://Explosion/scene/Explosion.tscn").Instance();
+            boom.Position = Position;
+            GetParent().AddChild(boom);
             // todo сигнал GameOver
         }
     }
@@ -134,10 +136,9 @@ public class Player : Area2D
     
     private void OnPlayerBodyEntered(RigidBody2D body)
     {
-        // todo сделать взрыв
-        // var boom = (Explosion)Explosion.Instance();
-        // boom.Position = Position;
-        // GetParent().AddChild(boom);
+        var boom = (Explosion) GD.Load<PackedScene>("res://Explosion/scene/Explosion.tscn").Instance();
+        boom.Position = Position;
+        GetParent().AddChild(boom);
         
         body.QueueFree();
         Hit();
