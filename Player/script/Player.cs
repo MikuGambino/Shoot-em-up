@@ -5,7 +5,7 @@ public class Player : Area2D
 {
     private int Speed = 100;
     public bool CanPlay = false;
-    public bool Upgrade = false;
+    private bool Upgrade = false;
     private int _playerEffect = 0;
     private Vector2 _screenSize;
 
@@ -85,69 +85,59 @@ public class Player : Area2D
             GetParent().AddChild(bullet3);
         }
     }
-    
-    // public void AddScore(int score)
-    // {
-    //     EmitSignal("Score", score);
-    // }
-    
+
     // TODO переименовать в годоте
-    // public void OnPlayerAreaEntered(Area2D area)
-    // {
-    //     if (area.GetType().Name.Contains("Booster"))
-    //     {
-    //         var booster = (Booster)area;
-    //         
-    //         if (booster.Type == "hp")
-    //         {
-    //             EmitSignal(nameof(HP));
-    //         }
-    //         else if (booster.Type == "gun")
-    //         {
-    //             Upgrade = true;
-    //         }
-    //         area.QueueFree();
-    //         return;
-    //     }
-    //     if (area.Name.GetType().Name.Contains("Bullet"))
-    //     {
-    //         var bullet = (Bullet)area;
-    //         if(bullet.Type == "default") return;
-    //         area.QueueFree();
-    //         EmitSignal(nameof(Hit));
-    //         Upgrade = false;
-    //         if (CanPlay)
-    //         {
-    //             GetNode<Timer>("PlayerEffect").Start();
-    //             GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", true);
-    //         }
-    //     }
-    //     if (area.GetType().Name.Contains("Boss"))
-    //     {
-    //         EmitSignal(nameof(CrashBoss));
-    //     }
-    // }
+    public void OnPlayerAreaEntered(Area2D area)
+    {
+        // if (area.GetType().Name.Contains("Booster"))
+        // {
+        //     var booster = (Booster)area;
+        //     
+        //     if (booster.Type == "hp")
+        //     {
+        //         EmitSignal(nameof(HP));
+        //     }
+        //     else if (booster.Type == "gun")
+        //     {
+        //         Upgrade = true;
+        //     }
+        //     area.QueueFree();
+        //     return;
+        // }
+        if (area.GetType().Name.Contains("MobBullet"))
+        {
+            area.QueueFree();
+            // todo отнять жизнь
+            Upgrade = false;
+            if (CanPlay)
+            {
+                GetNode<Timer>("PlayerEffect").Start();
+                GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", true);
+            }
+        }
+        if (area.GetType().Name.Contains("Boss"))
+        {
+            // EmitSignal(nameof(CrashBoss)); // todo убрать все жизни
+        }
+    }
     
-    //TODO переименовать в годоте
-    //TODO настроить таймер
-    //TODO настроить позицию пули
-    // public void OnPlayerBodyEntered(RigidBody2D body)
-    // {
-    //     var boom = (Explosion)Explosion.Instance();
-    //     boom.Position = Position;
-    //     GetParent().AddChild(boom);
-    //     
-    //     body.QueueFree();
-    //     EmitSignal("Hit");
-    //     
-    //     if (CanPlay)
-    //     {
-    //         GetNode<Timer>("PlayerEffect").Start();
-    //         GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", true);
-    //     }
-    // }
+    public void OnPlayerBodyEntered(RigidBody2D body)
+    {
+        // todo сделать взрыв
+        // var boom = (Explosion)Explosion.Instance();
+        // boom.Position = Position;
+        // GetParent().AddChild(boom);
+        
+        body.QueueFree();
+        // EmitSignal("Hit"); // todo отнять жизнь
+        
+        if (CanPlay)
+        {
+            GetNode<Timer>("PlayerEffect").Start();
+            GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", true);
+        }
+    }
     
-    //TODO проверить
     private void OnPlayerEffectTimeout()
     {
         _playerEffect++;
