@@ -4,9 +4,10 @@ using System;
 public class Player : Area2D
 {
     private int Speed = 100;
-    public bool CanPlay = false;
-    private bool Upgrade = false;
-    private int _playerEffect = 0;
+    public bool CanPlay;
+    private int _lives = 3;
+    private bool _upgrade;
+    private int _playerEffect;
     private Vector2 _screenSize;
 
     public override void _Ready()
@@ -72,7 +73,7 @@ public class Player : Area2D
         bullet1.Position = bulPos.GlobalPosition;
         GetParent().AddChild(bullet1);
         
-        if (Upgrade)
+        if (_upgrade)
         {
             var bullet2 = (PlayerBullet) playerBullet.Instance();
             bullet2.Init(Vector2.Right * 4 + Vector2.Up, -8);
@@ -86,8 +87,18 @@ public class Player : Area2D
         }
     }
 
-    // TODO переименовать в годоте
-    public void OnPlayerAreaEntered(Area2D area)
+    private void Hit()
+    {
+        _lives -= 1;
+        // todo уменьшить количество жизней в UI via signal        
+        if (_lives < 0)
+        {
+            // var boom = (Explosion)Explosion.Instance();
+            // GetParent().AddChild(boom);
+            // todo сигнал GameOver
+        }
+    }
+    private void OnPlayerAreaEntered(Area2D area)
     {
         // if (area.GetType().Name.Contains("Booster"))
         // {
@@ -108,20 +119,20 @@ public class Player : Area2D
         {
             area.QueueFree();
             // todo отнять жизнь
-            Upgrade = false;
+            _upgrade = false;
             if (CanPlay)
             {
                 GetNode<Timer>("PlayerEffect").Start();
-                GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", true);
             }
         }
         if (area.GetType().Name.Contains("Boss"))
         {
-            // EmitSignal(nameof(CrashBoss)); // todo убрать все жизни
+            _lives = 0;
+            Hit();
         }
     }
     
-    public void OnPlayerBodyEntered(RigidBody2D body)
+    private void OnPlayerBodyEntered(RigidBody2D body)
     {
         // todo сделать взрыв
         // var boom = (Explosion)Explosion.Instance();
@@ -129,17 +140,17 @@ public class Player : Area2D
         // GetParent().AddChild(boom);
         
         body.QueueFree();
-        // EmitSignal("Hit"); // todo отнять жизнь
+        Hit();
         
         if (CanPlay)
         {
             GetNode<Timer>("PlayerEffect").Start();
-            GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", true);
         }
     }
     
     private void OnPlayerEffectTimeout()
     {
+        if(_playerEffect == 0) GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", true);
         _playerEffect++;
         Visible = !Visible;
         if (_playerEffect == 20)

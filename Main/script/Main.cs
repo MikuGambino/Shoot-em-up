@@ -10,7 +10,6 @@ public class Main : Node
 // #pragma warning restore 649
     //
     // public int Score;
-    // public int Lives;
     // public bool BossScene = false;
     // public bool Playing = false;
 
@@ -29,22 +28,6 @@ public class Main : Node
         GD.Randomize();
     }
 
-    
-    // todo перенести в игрока
-    // public void _on_crash()
-    // {
-    //     Lives -= 1;
-    //     GetNode<GameUI>("GameUI").SetLifeUI(Lives);
-    //     
-    //     if (Lives < 0)
-    //     {
-    //         var boom = (Explosion)Explosion.Instance();
-    //         boom.Position = GetNode<Player>("Player").Position;
-    //         AddChild(boom);
-    //         GameOver();
-    //     }
-    // }
-    
     // public void AddScore(int score)
     // {
     //     Score += score;
