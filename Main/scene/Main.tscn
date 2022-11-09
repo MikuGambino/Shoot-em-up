@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Main/script/Main.cs" type="Script" id=1]
 [ext_resource path="res://Player/scene/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI/scene/GameUI.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -43,7 +44,10 @@ wait_time = 10.0
 curve = SubResource( 2 )
 
 [node name="BoosterSpawnLocation" type="PathFollow2D" parent="BoosterPath"]
-position = Vector2( 122, -21 )
+position = Vector2( 17, -21 )
+rotation = -0.00450461
+
+[node name="GameUI" parent="." instance=ExtResource( 3 )]
 
 [connection signal="timeout" from="MobTimer" to="." method="OnMobTimerTimeout"]
 [connection signal="timeout" from="StartTimer" to="." method="OnStartTimerTimeout"]

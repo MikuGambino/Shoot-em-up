@@ -9,6 +9,9 @@ public static class EventsHolder
 
 public class Events : Node
 {
-    [Signal] public delegate void DestroyEnemy(int score);
+    [Signal] public delegate void AddScore(int score);
+    [Signal] public delegate void SetLivesUI(int lives);
+    [Signal] public delegate void ResetUI();
+    
 
 }

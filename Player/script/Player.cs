@@ -9,7 +9,6 @@ public class Player : Area2D
     private bool _upgrade;
     private int _playerEffect;
     private Vector2 _screenSize;
-
     public override void _Ready()
     {
         // Hide(); //todo откоментрировать
@@ -90,7 +89,7 @@ public class Player : Area2D
     private void Hit()
     {
         _lives--;
-        // todo уменьшить количество жизней в UI via signal        
+        EventsHolder.events.EmitSignal("SetLivesUI", _lives);  
         if (_lives < 0)
         {
             var boom = (Explosion) GD.Load<PackedScene>("res://Explosion/scene/Explosion.tscn").Instance();
@@ -102,11 +101,9 @@ public class Player : Area2D
 
     private void AddLife()
     {
-        if (_lives < 5)
-        {
-            _lives++;
-            // todo увеличить кол-во жизней в UI
-        }
+        if (_lives >= 5) return;
+        _lives++;
+        EventsHolder.events.EmitSignal("SetLivesUI", _lives);
     }
 
     private void OnPlayerAreaEntered(Area2D area)
@@ -176,5 +173,11 @@ public class Player : Area2D
         Position = pos;
         Show();
         GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
+    }
+
+    public void Reset()
+    {
+        _lives = 3;
+        _upgrade = false;
     }
 }

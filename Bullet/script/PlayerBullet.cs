@@ -25,8 +25,8 @@ public class PlayerBullet : Bullet
         body.Hit();
         if (body.IsDead())
         {
-            if(body.GetType().Name.Contains("red")) EmitSignal("DestroyEnemy", 166);
-            if (body.GetType().Name.Contains("purple")) EmitSignal("DestroyEnemy", 166);
+            if (body.GetType().Name.Contains("Purple")) EventsHolder.events.EmitSignal("AddScore", 77);
+            if (body.GetType().Name.Contains("Red")) EventsHolder.events.EmitSignal("AddScore", 166);
 
             var boom = (Explosion) GD.Load<PackedScene>("res://Explosion/scene/Explosion.tscn").Instance();
             boom.Position = Position;

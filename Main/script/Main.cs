@@ -3,15 +3,14 @@ using System;
 
 public class Main : Node
 {
-// #pragma warning disable 649
-//     [Export] public PackedScene MobScene;
-//     [Export] public PackedScene BoosterScene;
-//     [Export] public PackedScene Explosion;
-// #pragma warning restore 649
-    //
-    // public int Score;
-    // public bool BossScene = false;
-    // public bool Playing = false;
+#pragma warning disable 649
+    [Export] public PackedScene MobScene;
+    [Export] public PackedScene BoosterScene;
+    [Export] public PackedScene Explosion;
+#pragma warning restore 649
+    
+    private bool _bossScene = false;
+    private bool _playing = false;
 
     // todo переделать сигналы
     public override void _Ready()
@@ -53,31 +52,26 @@ public class Main : Node
     //     GetNode<GameOver>("GameOver").Show();
     // }
     
-    // public void NewGame()
-    // {
-    //     GetNode<GameOver>("GameOver").Hide();
-    //     GetNode<Node2D>("GameUI/Win").Hide();
-    //
-    //     Score = 0;
-    //     Lives = 3;
-    //
-    //     var player = GetNode<Player>("Player");
-    //     var ui = GetNode<GameUI>("GameUI");
-    //     
-    //     ui.SetLifeUI(Lives);
-    //     ui.SetScoreUI(Score);
-    //     
-    //     player.CanPlay = true;
-    //     player.Upgrade = false;
-    //     Playing = true;
-    //
-    //     ui.Show();
-    //     
-    //     var startPosition = GetNode<Position2D>("StartPosition");
-    //     player.Start(startPosition.Position);
-    //
-    //     GetNode<Timer>("StartTimer").Start();
-    // }
+    public void NewGame()
+    {
+        GetNode<GameOver>("GameOver").Hide();
+        GetNode<Node2D>("GameUI/Win").Hide();
+        
+        EventsHolder.events.EmitSignal("ResetUI");
+    
+        var player = GetNode<Player>("Player");
+        var ui = GetNode<GameUI>("GameUI");
+        
+        player.Reset();
+        _playing = true;
+    
+        ui.Show();
+        
+        var startPosition = GetNode<Position2D>("StartPosition");
+        player.Start(startPosition.Position);
+    
+        GetNode<Timer>("StartTimer").Start();
+    }
 
     public void OnStartTimerTimeout()
     {

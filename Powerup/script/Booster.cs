@@ -4,12 +4,6 @@ using System;
 public class Booster : Area2D
 {
     public string Type;
-
-    public override void _Ready()
-    {
-        Console.WriteLine(Type);
-    }
-
     public override void _Process(float delta)
     {
         Position += Vector2.Down * 0.4f;
