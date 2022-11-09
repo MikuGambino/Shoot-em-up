@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Main/script/Main.cs" type="Script" id=1]
 [ext_resource path="res://Player/scene/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,11 @@
 [sub_resource type="Curve2D" id=1]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 270, 6, 0, 0, 0, 0, 271, 136 )
+}
+
+[sub_resource type="Curve2D" id=2]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 17, -21, 0, 0, 0, 0, 239, -22 )
 }
 
 [node name="Main" type="Node"]
@@ -31,5 +36,15 @@ curve = SubResource( 1 )
 position = Vector2( 270, 6 )
 rotation = 1.56312
 
+[node name="BoosterTimer" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="BoosterPath" type="Path2D" parent="."]
+curve = SubResource( 2 )
+
+[node name="BoosterSpawnLocation" type="PathFollow2D" parent="BoosterPath"]
+position = Vector2( 122, -21 )
+
 [connection signal="timeout" from="MobTimer" to="." method="OnMobTimerTimeout"]
 [connection signal="timeout" from="StartTimer" to="." method="OnStartTimerTimeout"]
+[connection signal="timeout" from="BoosterTimer" to="." method="OnBoosterTimerTimeout"]

@@ -34,16 +34,6 @@ public class Main : Node
     //     GoBossScene();
     //     GetNode<GameUI>("GameUI").SetScoreUI(Score);
     // }
-
-    // todo перенести в игрока
-    // public void AddLife()
-    // {
-    //     if (Lives < 5)
-    //     {
-    //         Lives++;
-    //         GetNode<GameUI>("GameUI").SetLifeUI(Lives);
-    //     }
-    // }
     
     // public void GameOver()
     // {
@@ -92,7 +82,7 @@ public class Main : Node
     public void OnStartTimerTimeout()
     {
         GetNode<Timer>("MobTimer").Start();
-        // GetNode<Timer>("BoosterTimer").Start();
+        GetNode<Timer>("BoosterTimer").Start();
     }
 
     public void OnMobTimerTimeout()
@@ -120,23 +110,24 @@ public class Main : Node
         AddChild(mob);
     }
 
-    // public void _on_BoosterTimer_timeout()
-    // {
-    //     var booster = (Booster)BoosterScene.Instance();
-    //
-    //     var boosterSpawnLocation = GetNode<PathFollow2D>("BoosterPath/BoosterSpawnLocation");
-    //     boosterSpawnLocation.Offset = GD.Randi();
-    //     
-    //     booster.Position = boosterSpawnLocation.Position;
-    //     
-    //     string[] types = { "gun", "hp" };
-    //     
-    //     booster.SetType(types[new Random().Next(0, 2)]);
-    //     
-    //     GetTree().CallGroup("boosters", "queue_free");
-    //
-    //     AddChild(booster);
-    // }
+    public void OnBoosterTimerTimeout()
+    {
+        
+        var booster = (Booster) GD.Load<PackedScene>("res://Powerup/scene/Booster.tscn").Instance();
+
+        var boosterSpawnLocation = GetNode<PathFollow2D>("BoosterPath/BoosterSpawnLocation");
+        boosterSpawnLocation.Offset = GD.Randi();
+        
+        booster.Position = boosterSpawnLocation.Position;
+        
+        string[] types = { "gun", "hp" };
+        
+        booster.SetType(types[new Random().Next(0, 2)]);
+        
+        GetTree().CallGroup("boosters", "queue_free");
+    
+        AddChild(booster);
+    }
 
     // public void GoBossScene()
     // {

@@ -93,41 +93,49 @@ public class Player : Area2D
         // todo уменьшить количество жизней в UI via signal        
         if (_lives < 0)
         {
-            Console.WriteLine(_lives);
             var boom = (Explosion) GD.Load<PackedScene>("res://Explosion/scene/Explosion.tscn").Instance();
             boom.Position = Position;
             GetParent().AddChild(boom);
             // todo сигнал GameOver
         }
     }
+
+    private void AddLife()
+    {
+        if (_lives < 5)
+        {
+            _lives++;
+            // todo увеличить кол-во жизней в UI
+        }
+    }
+
     private void OnPlayerAreaEntered(Area2D area)
     {
-        // if (area.GetType().Name.Contains("Booster"))
-        // {
-        //     var booster = (Booster)area;
-        //     
-        //     if (booster.Type == "hp")
-        //     {
-        //         EmitSignal(nameof(HP));
-        //     }
-        //     else if (booster.Type == "gun")
-        //     {
-        //         Upgrade = true;
-        //     }
-        //     area.QueueFree();
-        //     return;
-        // }
-        if (area.GetType().Name.Contains("MobBullet"))
+        if (area.GetType().Name.Contains("Booster"))
+        {
+            var booster = (Booster)area;
+            
+            if (booster.Type == "hp")
+            {
+                AddLife();
+            }
+            else if (booster.Type == "gun")
+            {
+                _upgrade = true;
+            }
+            area.QueueFree();
+        }
+        else if (area.GetType().Name.Contains("MobBullet"))
         {
             area.QueueFree();
-            // todo отнять жизнь
+            Hit();
             _upgrade = false;
             if (CanPlay)
             {
                 GetNode<Timer>("PlayerEffect").Start();
             }
         }
-        if (area.GetType().Name.Contains("Boss"))
+        else if (area.GetType().Name.Contains("Boss"))
         {
             _lives = 0;
             Hit();
