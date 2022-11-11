@@ -20,8 +20,7 @@ public class Main : Node
         EventsHolder.events.Connect("GameOver", this, nameof(GameOver));
         GD.Randomize();
     }
-    
-    
+
     public void GameOver()
     {
         GetTree().CallGroup("mobs", "queue_free");

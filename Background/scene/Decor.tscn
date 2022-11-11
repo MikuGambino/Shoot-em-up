@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Background/sprite/sky-with-clouds-merged.png" type="Texture" id=1]
+[ext_resource path="res://Background/script/Decor.cs" type="Script" id=3]
+
+[node name="Decor" type="Node2D"]
+position = Vector2( 0, 72 )
+script = ExtResource( 3 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( 0, -72 )
+texture = ExtResource( 1 )
+offset = Vector2( 384, 144 )
+
+[node name="Sprite3" type="Sprite" parent="."]
+position = Vector2( 768, -72 )
+texture = ExtResource( 1 )
+offset = Vector2( 384, 144 )
