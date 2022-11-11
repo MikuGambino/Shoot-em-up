@@ -12,6 +12,9 @@ public class Events : Node
     [Signal] public delegate void AddScore(int score);
     [Signal] public delegate void SetLivesUI(int lives);
     [Signal] public delegate void ResetUI();
+    [Signal] public delegate void Start();
+    [Signal] public delegate void GameOver();
+
     
 
 }

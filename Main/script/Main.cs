@@ -10,47 +10,35 @@ public class Main : Node
 #pragma warning restore 649
     
     private bool _bossScene = false;
-    private bool _playing = false;
+    private bool _playing;
 
-    // todo переделать сигналы
     public override void _Ready()
     {
-    //     GetNode<GameOver>("GameOver").Hide();
-    //     GetNode<GameUI>("GameUI").Hide();
-    //     GetNode<Player>("Player").Connect("Hit", this, nameof(_on_crash));
-    //     GetNode<Player>("Player").Connect("CrashBoss", this, nameof(GameOver));
-    //     GetNode<Player>("Player").Connect("Score", this, nameof(AddScore));
-    //     GetNode<Player>("Player").Connect("HP", this, nameof(AddLife));
-    //     GetNode<Boss>("Boss").Connect("Win", this, nameof(Win));
-    //     GetNode<MainMenu>("MainMenu").Connect("Start", this, nameof(NewGame));
-    //     GetNode<GameOver>("GameOver").Connect("YesPressed", this, nameof(NewGame));
+        GetNode<GameOver>("GameOver").Hide();
+        GetNode<GameUI>("GameUI").Hide();
+        EventsHolder.events.Connect("Start", this, nameof(NewGame));
+        EventsHolder.events.Connect("GameOver", this, nameof(GameOver));
         GD.Randomize();
     }
-
-    // public void AddScore(int score)
-    // {
-    //     Score += score;
-    //     GoBossScene();
-    //     GetNode<GameUI>("GameUI").SetScoreUI(Score);
-    // }
     
-    // public void GameOver()
-    // {
-    //     GetTree().CallGroup("mobs", "queue_free");
-    //     GetTree().CallGroup("boosters", "queue_free");
-    //     Playing = false;
-    //     BossScene = false;
-    //     GetNode<Timer>("Boss/Reload").Stop();
-    //     GetNode<Boss>("Boss").Hide();
-    //     GetNode<CollisionShape2D>("Boss/CollisionShape2D").SetDeferred("disabled", true);
-    //     GetNode<GameUI>("GameUI").Hide();
-    //     GetNode<Player>("Player").CanPlay = false;
-    //     GetNode<CollisionShape2D>("Player/CollisionShape2D").SetDeferred("disabled", true);
-    //     GetNode<Player>("Player").Hide();
-    //     GetNode<Timer>("MobTimer").Stop();
-    //     GetNode<Timer>("BoosterTimer").Stop();
-    //     GetNode<GameOver>("GameOver").Show();
-    // }
+    
+    public void GameOver()
+    {
+        GetTree().CallGroup("mobs", "queue_free");
+        GetTree().CallGroup("boosters", "queue_free");
+        _playing = false;
+        _bossScene = false;
+        // GetNode<Timer>("Boss/Reload").Stop();
+        // GetNode<Boss>("Boss").Hide();
+        // GetNode<CollisionShape2D>("Boss/CollisionShape2D").SetDeferred("disabled", true);
+        GetNode<GameUI>("GameUI").Hide();
+        GetNode<Player>("Player").CanPlay = false;
+        GetNode<CollisionShape2D>("Player/CollisionShape2D").SetDeferred("disabled", true);
+        GetNode<Player>("Player").Hide();
+        GetNode<Timer>("MobTimer").Stop();
+        GetNode<Timer>("BoosterTimer").Stop();
+        GetNode<GameOver>("GameOver").Show();
+    }
     
     public void NewGame()
     {
@@ -62,7 +50,6 @@ public class Main : Node
         var player = GetNode<Player>("Player");
         var ui = GetNode<GameUI>("GameUI");
         
-        player.Reset();
         _playing = true;
     
         ui.Show();

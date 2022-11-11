@@ -3,15 +3,13 @@ using System;
 
 public class MainMenu : Control
 {
-    [Signal] public delegate void Start();
-    
-    public void _on_Start_pressed()
+    public void OnStartPressed()
     {
-        EmitSignal(nameof(Start));
+        EventsHolder.events.EmitSignal("Start");
         Hide();
     }
 
-    public void _on_Exit_pressed()
+    public void OnExitPressed()
     {
         GetTree().Quit();
     }

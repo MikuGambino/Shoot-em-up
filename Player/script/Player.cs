@@ -11,8 +11,8 @@ public class Player : Area2D
     private Vector2 _screenSize;
     public override void _Ready()
     {
-        // Hide(); //todo откоментрировать
-        CanPlay = true; //todo убрать
+        Hide();
+        CanPlay = false;
         var animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
         animatedSprite.Animation = "default";
         animatedSprite.Play();
@@ -95,7 +95,7 @@ public class Player : Area2D
             var boom = (Explosion) GD.Load<PackedScene>("res://Explosion/scene/Explosion.tscn").Instance();
             boom.Position = Position;
             GetParent().AddChild(boom);
-            // todo сигнал GameOver
+            EventsHolder.events.EmitSignal("GameOver");
         }
     }
 
@@ -171,13 +171,10 @@ public class Player : Area2D
     public void Start(Vector2 pos)
     {
         Position = pos;
-        Show();
-        GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
-    }
-
-    public void Reset()
-    {
+        CanPlay = true;
         _lives = 3;
         _upgrade = false;
+        Show();
+        GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
     }
 }

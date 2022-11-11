@@ -42,11 +42,6 @@ animations = [ {
 "name": "3",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "0",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
 "name": "5",
@@ -55,6 +50,11 @@ animations = [ {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "1",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "0",
 "speed": 5.0
 } ]
 
@@ -75,16 +75,6 @@ animations = [ {
 "name": "3",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 8 ) ],
-"loop": true,
-"name": "0",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 10 ) ],
-"loop": true,
-"name": "8",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 12 ) ],
 "loop": true,
 "name": "5",
@@ -95,6 +85,21 @@ animations = [ {
 "name": "1",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "8",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "0",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ) ],
+"loop": true,
+"name": "6",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 11 ) ],
 "loop": true,
 "name": "9",
@@ -103,11 +108,6 @@ animations = [ {
 "frames": [ ExtResource( 17 ) ],
 "loop": true,
 "name": "7",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 13 ) ],
-"loop": true,
-"name": "6",
 "speed": 5.0
 } ]
 
@@ -132,6 +132,7 @@ script = ExtResource( 7 )
 
 [node name="HP" type="AnimatedSprite" parent="."]
 position = Vector2( 17, 9 )
+z_index = 3
 frames = SubResource( 1 )
 animation = "5"
 
@@ -139,26 +140,31 @@ animation = "5"
 
 [node name="num1" type="AnimatedSprite" parent="Score"]
 position = Vector2( 205, 9 )
+z_index = 3
 frames = SubResource( 2 )
 animation = "0"
 
 [node name="num2" type="AnimatedSprite" parent="Score"]
 position = Vector2( 215, 9 )
+z_index = 3
 frames = SubResource( 2 )
 animation = "0"
 
 [node name="num3" type="AnimatedSprite" parent="Score"]
 position = Vector2( 225, 9 )
+z_index = 3
 frames = SubResource( 2 )
 animation = "0"
 
 [node name="num4" type="AnimatedSprite" parent="Score"]
 position = Vector2( 235, 9 )
+z_index = 3
 frames = SubResource( 2 )
 animation = "0"
 
 [node name="num5" type="AnimatedSprite" parent="Score"]
 position = Vector2( 245, 9 )
+z_index = 3
 frames = SubResource( 2 )
 animation = "0"
 
@@ -167,8 +173,10 @@ animation = "0"
 [node name="Pepe" type="AnimatedSprite" parent="Win"]
 position = Vector2( 124, 99 )
 scale = Vector2( 2.78571, 2.78571 )
+z_index = 3
 frames = SubResource( 3 )
 
 [node name="YouWon" type="AnimatedSprite" parent="Win"]
 position = Vector2( 128, 45 )
+z_index = 3
 frames = SubResource( 4 )
