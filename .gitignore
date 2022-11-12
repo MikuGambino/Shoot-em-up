@@ -1,5 +1,4 @@
 *.md5
-project.godot
 .import/.gdignore
 .mono/assemblies/Debug/api_hash_cache.cfg
 .mono/assemblies/Debug/GodotSharp.dll
