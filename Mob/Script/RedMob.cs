@@ -14,18 +14,18 @@ public class RedMob : Mob
     protected override void Attack()
     {
         var bulPos = GetNode<Position2D>("BulletPosition");
-        var playerBullet = GD.Load<PackedScene>("res://Bullet/scene/MobBullet.tscn");
-        var bullet1 = (MobBullet) playerBullet.Instance();
+        var mobBullet = GD.Load<PackedScene>("res://Bullet/scene/MobBullet.tscn");
+        var bullet1 = (MobBullet) mobBullet.Instance();
         bullet1.Position = bulPos.GlobalPosition;
         bullet1.Init("red");
         GetParent().AddChild(bullet1);
         
-        var bullet2 = (MobBullet) playerBullet.Instance();
+        var bullet2 = (MobBullet) mobBullet.Instance();
         bullet2.Position = bulPos.GlobalPosition;
         bullet2.Init("red", Vector2.Left * 2 + Vector2.Up * 0.5f, 8);
         GetParent().AddChild(bullet2);
         
-        var bullet3 = (MobBullet) playerBullet.Instance();
+        var bullet3 = (MobBullet) mobBullet.Instance();
         bullet3.Position = bulPos.GlobalPosition;
         bullet3.Init("red", Vector2.Left * 2 + Vector2.Down * 0.5f, -8);
         GetParent().AddChild(bullet3);

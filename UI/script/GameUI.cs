@@ -20,7 +20,6 @@ public class GameUI : Node2D
 
     public void AddScore(int score)
     {
-        Console.WriteLine("da");
         Score += score;
         for (int i = 1, j = 10000; i <= 5; i++, j /= 10)
         {

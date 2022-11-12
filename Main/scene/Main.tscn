@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Main/script/Main.cs" type="Script" id=1]
 [ext_resource path="res://Player/scene/Player.tscn" type="PackedScene" id=2]
@@ -6,30 +6,29 @@
 [ext_resource path="res://UI/scene/MainMenu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://UI/scene/GameOver.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Background/scene/Decor.tscn" type="PackedScene" id=6]
-
-[sub_resource type="Curve2D" id=1]
-_data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 270, 6, 0, 0, 0, 0, 271, 136 )
-}
+[ext_resource path="res://Boss/scene/Boss.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Curve2D" id=2]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 17, -21, 0, 0, 0, 0, 239, -22 )
 }
 
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 270, 6, 0, 0, 0, 0, 271, 136 )
+}
+
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
 
-[node name="Decor" parent="." instance=ExtResource( 6 )]
-
-[node name="GameOver" parent="." instance=ExtResource( 5 )]
-
-[node name="MainMenu" parent="." instance=ExtResource( 4 )]
-
 [node name="Player" parent="." instance=ExtResource( 2 )]
+z_index = 5
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.9
+
+[node name="BoosterTimer" type="Timer" parent="."]
+wait_time = 10.0
 
 [node name="StartTimer" type="Timer" parent="."]
 wait_time = 2.0
@@ -38,15 +37,15 @@ one_shot = true
 [node name="StartPosition" type="Position2D" parent="."]
 position = Vector2( 40, 75 )
 
-[node name="MobPath" type="Path2D" parent="."]
-curve = SubResource( 1 )
+[node name="MainMenu" parent="." instance=ExtResource( 4 )]
 
-[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
-position = Vector2( 270, 6 )
-rotation = 1.56312
+[node name="GameOver" parent="." instance=ExtResource( 5 )]
 
-[node name="BoosterTimer" type="Timer" parent="."]
-wait_time = 10.0
+[node name="GameUI" parent="." instance=ExtResource( 3 )]
+z_index = 5
+
+[node name="Decor" parent="." instance=ExtResource( 6 )]
+z_index = -5
 
 [node name="BoosterPath" type="Path2D" parent="."]
 curve = SubResource( 2 )
@@ -55,8 +54,31 @@ curve = SubResource( 2 )
 position = Vector2( 17, -21 )
 rotation = -0.00450461
 
-[node name="GameUI" parent="." instance=ExtResource( 3 )]
+[node name="MobPath" type="Path2D" parent="."]
+curve = SubResource( 1 )
+
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
+position = Vector2( 270, 6 )
+rotation = 1.56312
+
+[node name="Boss" parent="." instance=ExtResource( 7 )]
+
+[node name="BeforeTimerBoss" type="Timer" parent="."]
+one_shot = true
+
+[node name="BossStartPosition" type="Position2D" parent="."]
+position = Vector2( 289, 75 )
+
+[node name="WinTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="Delay" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="MobTimer" to="." method="OnMobTimerTimeout"]
-[connection signal="timeout" from="StartTimer" to="." method="OnStartTimerTimeout"]
 [connection signal="timeout" from="BoosterTimer" to="." method="OnBoosterTimerTimeout"]
+[connection signal="timeout" from="StartTimer" to="." method="OnStartTimerTimeout"]
+[connection signal="timeout" from="BeforeTimerBoss" to="." method="OnBeforeTimerBossTimeout"]
+[connection signal="timeout" from="WinTimer" to="." method="OnWinTimerTimeout"]
+[connection signal="timeout" from="Delay" to="." method="OnDelayTimeout"]

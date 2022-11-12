@@ -3,7 +3,7 @@
 [ext_resource path="res://Bullet/script/PlayerBullet.cs" type="Script" id=1]
 [ext_resource path="res://Bullet/scene/Bullet.tscn" type="PackedScene" id=2]
 
-[node name="PlayerBullet" instance=ExtResource( 2 )]
+[node name="PlayerBullet" groups=["bullets"] instance=ExtResource( 2 )]
 script = ExtResource( 1 )
 
 [connection signal="body_entered" from="." to="." method="OnBulletBodyEntered"]

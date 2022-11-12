@@ -170,6 +170,7 @@ public class Player : Area2D
     
     public void Start(Vector2 pos)
     {
+        ZIndex = 10;
         Position = pos;
         CanPlay = true;
         _lives = 3;

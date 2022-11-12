@@ -14,6 +14,7 @@ public class Events : Node
     [Signal] public delegate void ResetUI();
     [Signal] public delegate void Start();
     [Signal] public delegate void GameOver();
+    [Signal] public delegate void Win();
 
     
 
