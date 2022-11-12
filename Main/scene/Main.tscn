@@ -74,6 +74,7 @@ wait_time = 10.0
 one_shot = true
 
 [node name="Delay" type="Timer" parent="."]
+wait_time = 7.0
 one_shot = true
 
 [connection signal="timeout" from="MobTimer" to="." method="OnMobTimerTimeout"]
