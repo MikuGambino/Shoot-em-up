@@ -21,6 +21,7 @@ Events="*res://Events.cs"
 
 window/size/width=256
 window/size/height=144
+window/size/fullscreen=true
 window/size/test_width=768
 window/size/test_height=432
 window/stretch/mode="viewport"
